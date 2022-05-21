@@ -18,19 +18,6 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
   return (
     <>
-      {/* <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
-        strategy="afterInteraction"
-      />
-      <Script id="google-analytics" strategy="afterInteraction">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', ${process.env.GOOGLE_ANALYTICS_ID});
-        `}
-      </Script> */}
       <Component {...pageProps} />
     </>
   );
