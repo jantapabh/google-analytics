@@ -1,21 +1,35 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 import "../styles/globals.css";
 import Script from "next/script";
 import { useRouter } from "next/router";
-import ReactGA from "react-ga";
+import * as ga from "../lib/googleAnalyticsScript";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
-    ReactGA.initialize(process.env.GOOGLE_ANALYTICS_ID);
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    const handleRouterChange = (url) => {
+      ga.pageview(url);
+    };
+
+    router.events.on("routeChangeComplete", handleRouterChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouterChange);
+    };
   }, [router]);
   return (
     <>
-      {/* <Script src="/path/to/bower_components/react-ga/dist/react-ga.min.js"></Script> */}
-      <Script strategy="afterInteraction">
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
+        strategy="afterInteraction"
+      />
+      <Script id="google-analytics" strategy="afterInteraction">
         {`
-          ReactGA.initialize(process.env.GOOGLE_ANALYTICS_ID, { debug: true });
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', ${process.env.GOOGLE_ANALYTICS_ID});
         `}
       </Script>
       <Component {...pageProps} />
