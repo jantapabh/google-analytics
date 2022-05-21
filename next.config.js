@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    GOOGLE_ANALYTICS_ID: "G-1G8YM0F4GV"
+    GOOGLE_ANALYTICS_ID: "G-1C2P11WTB5"
   }
 }
 

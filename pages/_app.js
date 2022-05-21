@@ -16,15 +16,15 @@ function MyApp({ Component, pageProps }) {
     return () => {
       router.events.off("routeChangeComplete", handleRouterChange);
     };
-  }, [router.events]);
-
+  }, [router]);
+  console.log("process.env.GOOGLE_ANALYTICS_ID : ",process.env.GOOGLE_ANALYTICS_ID);
   return (
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
         strategy="afterInteraction"
       />
-      <Script id="google-analytics-script" strategy="afterInteraction">
+      <Script id="google-analytics" strategy="afterInteraction">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
