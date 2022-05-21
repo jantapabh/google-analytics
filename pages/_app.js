@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
   return (
     <>
-      <Script src="/path/to/bower_components/react-ga/dist/react-ga.min.js"></Script>
+      {/* <Script src="/path/to/bower_components/react-ga/dist/react-ga.min.js"></Script> */}
       <Script strategy="afterInteraction">
         {`
           ReactGA.initialize(process.env.GOOGLE_ANALYTICS_ID, { debug: true });
